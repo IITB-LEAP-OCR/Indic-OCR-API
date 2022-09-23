@@ -1,0 +1,3 @@
+[submodule "doctr"]
+	path = doctr
+	url = https://github.com/kasuba-badri-vishal/doctr-iitb.git
