@@ -1,10 +1,10 @@
+import os
+
 MODEL_PATH = "./../models/recognition/handwritten/"
 INPUT_PATH = "./../datasets/"
 
 HOST = "0.0.0.0"
 PORT = 5000
-
-import os
 
 basepath = os.path.dirname(os.path.realpath(__file__))
 

@@ -1,0 +1,8 @@
+sqlite3
+pandas==1.4.1
+Flask==2.2.2
+numpy==1.23.3
+onnxruntime==1.12.1
+opencv_python==4.6.0.66
+Pillow==9.2.0
+tqdm==4.63.0

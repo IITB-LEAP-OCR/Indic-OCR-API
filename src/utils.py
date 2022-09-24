@@ -9,7 +9,6 @@ from torch.utils.data import DataLoader, SequentialSampler
 from torchvision.transforms import Normalize
 from tqdm import tqdm
 
-
 from doctr import datasets
 from doctr import transforms as T
 from doctr.datasets import VOCABS

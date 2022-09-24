@@ -1,5 +1,4 @@
 import os
-import json
 import uuid
 import sqlite3
 from utils import *
@@ -20,6 +19,10 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
+@app.route('/',methods=['GET', 'POST'])
+def hello_world():
+    return "Hello World"
+           
 @app.route('/v0/upload',methods=['GET', 'POST'])
 def perform_upload():
     if request.method =="POST":
