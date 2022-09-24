@@ -90,7 +90,7 @@ def perform_inference():
                 img_name2 = data['file_path'].split('/')[-1]
                 if img_name1 == img_name2:
                     data["text"] = result[key]
-        return jsonify({"data":json_data,"text":result})
+        return jsonify({"data":json_data})
 
 if __name__ == '__main__':
 	# when first starting the app from docker, we load the model into memory

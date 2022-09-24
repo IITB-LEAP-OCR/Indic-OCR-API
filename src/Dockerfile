@@ -20,12 +20,10 @@ RUN apt update && apt install -y curl
 RUN apt-get install ffmpeg libsm6 libxext6  -y
 RUN pip3 install torch torchvision
 
+RUN python3 init_db.py
+RUN python3 setup.py
+
 EXPOSE 5000
 
-# intialize the db
-CMD ["python3","init_db.py"]
-
-#download the models & doctr setup
-CMD ["python3","setup.py"]
 
 CMD ["python3","app.py"]
