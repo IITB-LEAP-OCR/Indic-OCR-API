@@ -5,7 +5,12 @@ links = ['https://github.com/kasuba-badri-vishal/doctr-iitb/releases/download/In
 
 download_folder = os.path.join(modelpath, 'recognition', 'handwritten')
 
+
+
 for link in links:
-    wget.download(link, download_folder)
+    try:
+        os.system('wget -nc {} {}'.format(download_folder,link))
+    except:
+        wget.download(link, download_folder)
     
 print("\nDownloaded all models")

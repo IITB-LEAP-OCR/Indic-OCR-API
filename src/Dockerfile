@@ -20,8 +20,9 @@ RUN apt update && apt install -y curl
 RUN apt-get install ffmpeg libsm6 libxext6  -y
 RUN pip3 install torch torchvision
 
-RUN python3 init_db.py
+RUN pip3 install wget
 RUN python3 setup.py
+RUN mkdir uploads
 
 EXPOSE 5000
 
