@@ -15,6 +15,7 @@ from doctr import transforms as T
 from doctr.datasets import VOCABS
 from doctr.models import recognition
 from doctr.utils.metrics import TextMatch
+from config import ALLOWED_EXTENSIONS
 
 os.environ["USE_TORCH"] = "1"
 
@@ -160,3 +161,6 @@ def log(s):
 	s = f'[{int(time.time()*100)%10000}]\t{s}'
 	print(s)
 
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS

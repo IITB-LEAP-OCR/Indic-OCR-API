@@ -132,3 +132,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+models/recognition/printed/*.pt
+models/recognition/handwritten/*.pt
+
+models/detection/printed/*.pt
+models/detection/handwritten/*.pt
+src/log.txt
