@@ -50,8 +50,8 @@ API for Handwritten and Printed Texts Recognition for Indian Languages using Doc
     "meta": {
         "input_path": "./../sample/",
         "device": 0
-    }
-}]
+    }}
+    ]
 
 ### Response
 
@@ -77,5 +77,4 @@ API for Handwritten and Printed Texts Recognition for Indian Languages using Doc
             "model-id": "1",
             "text": ""
         }
-    ]
-}
+    ]}
