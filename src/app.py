@@ -47,6 +47,9 @@ def perform_upload():
                 file_id = str(uuid.uuid4())
                 total_ids.append(file_id)
                 filename_new = f"img_{file_id}" + "." + filename_ext
+                isExist = os.path.exists(upload)
+                if not isExist:
+                    os.makedirs(upload)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename_new))
                 path = os.path.join(app.config['UPLOAD_FOLDER'], filename_new)
                 conn = get_db_connection()

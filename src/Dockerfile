@@ -13,12 +13,12 @@ RUN git clone https://github.com/gamingflexer/DocTR_Indic_OCR_API.git /data/app
 
 WORKDIR /data
 WORKDIR /data/app/src/
-RUN git clone https://github.com/kasuba-badri-vishal/doctr-iitb.git
 
 RUN pip install -r requirements.txt
 
 RUN apt update && apt install -y curl
 RUN apt-get install ffmpeg libsm6 libxext6  -y
+RUN pip3 install torch torchvision
 
 EXPOSE 5000
 
