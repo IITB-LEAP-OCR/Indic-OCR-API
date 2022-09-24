@@ -46,6 +46,7 @@ def perform_upload():
                 file_id = str(uuid.uuid4())
                 total_ids.append(file_id)
                 filename_new = f"img_{file_id}" + "." + filename_ext
+                print(filename_new)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename_new))
                 path = os.path.join(app.config['UPLOAD_FOLDER'], filename_new)
                 conn = get_db_connection()
@@ -56,7 +57,7 @@ def perform_upload():
     elif request.method =="GET":
         return ("Error GET Not Configured")
 
-@app.route('/api/v0/Inference',methods=['GET', 'POST'])
+@app.route('/api/v0/inference',methods=['GET', 'POST'])
 def perform_inference():
     if request.method =="POST":
         main_context = []
@@ -67,8 +68,8 @@ def perform_inference():
             posts = conn.execute('SELECT file_path FROM request WHERE file_id=?',(id,)).fetchall()
             file_path = posts[0]['file_path']
             data['file_path']=file_path
-            #result = infer_model(data["language"], data["modality"], MODEL_PATH, file_path, data["meta"]["device"])
-            result = ""
+            result = infer_model(data["language"], data["modality"], MODEL_PATH, upload, data["meta"]["device"])
+            
             context = {"text":result}
             context.update(data)
             main_context.append(context.copy())

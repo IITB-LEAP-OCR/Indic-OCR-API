@@ -25,8 +25,8 @@ def get_test_results(predictions, language):
     df = df.drop_duplicates()
     df['id']= df['name'].str.split("_")
     df[['temp','id']] =  pd.DataFrame(df.id.tolist(), index= df.index)
-    df['id'] = df['id'].apply(lambda x: str(x).rstrip('.jpg'))
-    df['id'] = df['id'].astype(int)
+    df['id'] = df['id'].apply(lambda x: str(x).rstrip('.jpeg'))
+    #df['id'] = df['id'].astype(int)
     df['name'] = df['name'].str.replace('_','/')
     df = df.sort_values('id')
     df = df[['name','pred']]
@@ -34,9 +34,6 @@ def get_test_results(predictions, language):
     filename = 'results.txt'
     df.to_csv(filename, sep='\t', index=False)
     return data
-    
-    
-
 
 
 @torch.no_grad()
@@ -84,7 +81,7 @@ def evaluate(model, val_loader, batch_transforms, val_metric, amp=False):
 
 def infer_model(language, modality, model_path, img_path, device):
 
-    arch = "crnn_vgg16_bn_" + modality + "_" + language + ".pt" 
+    arch = "crnn_vgg16_bn_" + language + ".pt" 
     workers = None
     torch.backends.cudnn.benchmark = True
 
@@ -134,16 +131,17 @@ def infer_model(language, modality, model_path, img_path, device):
     val_metric = TextMatch()
 
     # GPU
-    if isinstance(device, int):
-        if not torch.cuda.is_available():
-            raise AssertionError("PyTorch cannot access your GPU. Please investigate!")
-        if device >= torch.cuda.device_count():
-            raise ValueError("Invalid device index")
-    # Silent default switch to GPU if available
-    elif torch.cuda.is_available():
-        device = 0
-    else:
-        print("No accessible GPU, targe device set to CPU.")
+    # if isinstance(device, int):
+    #     if not torch.cuda.is_available():
+    #         raise AssertionError("PyTorch cannot access your GPU. Please investigate!")
+    #     if device >= torch.cuda.device_count():
+    #         raise ValueError("Invalid device index")
+    # # Silent default switch to GPU if available
+    # elif torch.cuda.is_available():
+    #     device = 0
+    # else:
+    #     print("No accessible GPU, targe device set to CPU.")
+    
     if torch.cuda.is_available():
         torch.cuda.set_device(device)
         model = model.cuda()
