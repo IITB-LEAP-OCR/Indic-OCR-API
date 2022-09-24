@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # -*- coding:utf-8 -*-
 import os
 import uuid
@@ -6,7 +7,7 @@ from utils import *
 from config import *
 import logging as lg
 from werkzeug.utils import secure_filename
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify
 
 #logging basic configuration
 lg.basicConfig(filename="log.txt",level=lg.DEBUG)
@@ -21,10 +22,10 @@ def get_db_connection():
     return conn
 
 @app.route('/',methods=['GET', 'POST'])
-def hello_world():
-    return "Hello World"
+def index():
+    return "Running"
            
-@app.route('/v0/upload',methods=['GET', 'POST'])
+@app.route('/api/v0/upload',methods=['GET', 'POST'])
 def perform_upload():
     if request.method =="POST":
         if 'file' not in request.files:
@@ -55,7 +56,7 @@ def perform_upload():
     elif request.method =="GET":
         return ("Error GET Not Configured")
 
-@app.route('/v0/interference',methods=['GET', 'POST'])
+@app.route('/api/v0/Inference',methods=['GET', 'POST'])
 def perform_inference():
     if request.method =="POST":
         main_context = []
@@ -76,4 +77,4 @@ def perform_inference():
 if __name__ == '__main__':
 	# when first starting the app from docker, we load the model into memory
 	# and then start the flask app
-	app.run(debug=True, host=HOST, port=PORT, use_reloader=True)
+	app.run(debug=False, host=HOST, port=PORT, use_reloader=False)
