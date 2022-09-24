@@ -7,3 +7,5 @@ download_folder = os.path.join(modelpath, 'recognition', 'handwritten')
 
 for link in links:
     wget.download(link, download_folder)
+    
+print("Downloaded all models")

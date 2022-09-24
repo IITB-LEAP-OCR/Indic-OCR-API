@@ -47,7 +47,6 @@ def perform_upload():
                 file_id = str(uuid.uuid4())
                 total_ids.append(file_id)
                 filename_new = f"img_{file_id}" + "." + filename_ext
-                print(filename_new)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename_new))
                 path = os.path.join(app.config['UPLOAD_FOLDER'], filename_new)
                 conn = get_db_connection()
@@ -61,9 +60,11 @@ def perform_upload():
 @app.route('/api/v0/inference',methods=['GET', 'POST'])
 def perform_inference():
     if request.method =="POST":
-        main_context = []
         json_data = request.get_json()
         folder_list = os.listdir(upload)
+        for folder in folder_list:
+            if folder.endswith(".jpeg") or folder.endswith(".jpg") or folder.endswith(".png") or folder.endswith(".DS_Store"):
+                folder_list.remove(folder)
         if len(folder_list) == 0:
             os.mkdir(upload + "/1")
             batch_folder = upload + "/1"

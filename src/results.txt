@@ -1,2 +1,14 @@
 name	pred
 img/1a2f5995-55cf-4907-81da-8283a9358815.jpeg	নথধন
+name	pred
+img/145a9574-02d4-4417-9ae0-24ad5e6a9885.jpeg	জলাশিা
+img/b98c9176-622d-4cdd-9b18-abc13435afcf.jpeg	নথধন
+name	pred
+img/145a9574-02d4-4417-9ae0-24ad5e6a9885.jpeg	জলাশিা
+img/b98c9176-622d-4cdd-9b18-abc13435afcf.jpeg	নথধন
+name	pred
+img/145a9574-02d4-4417-9ae0-24ad5e6a9885.jpeg	জলাশিা
+img/b98c9176-622d-4cdd-9b18-abc13435afcf.jpeg	নথধন
+name	pred
+img/145a9574-02d4-4417-9ae0-24ad5e6a9885.jpeg	জলাশিা
+img/b98c9176-622d-4cdd-9b18-abc13435afcf.jpeg	নথধন
