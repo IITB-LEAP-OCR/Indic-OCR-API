@@ -2,6 +2,7 @@
 # -*- coding:utf-8 -*-
 import os
 import uuid
+import shutil
 import sqlite3
 from utils import *
 from config import *
@@ -42,7 +43,7 @@ def perform_upload():
         for file in files:
             if file and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
-                filename_ext = filename.split('.')[1]
+                filename_ext = filename.split('.')[-1]
                 file_id = str(uuid.uuid4())
                 total_ids.append(file_id)
                 filename_new = f"img_{file_id}" + "." + filename_ext
@@ -62,18 +63,30 @@ def perform_inference():
     if request.method =="POST":
         main_context = []
         json_data = request.get_json()
+        folder_list = os.listdir(upload)
+        if len(folder_list) == 0:
+            os.mkdir(upload + "/1")
+            batch_folder = upload + "/1"
+        else:
+            os.mkdir(upload + "/" + str(len(folder_list)+1))
+            batch_folder = upload + "/" + str(len(folder_list)+1)
         for data in json_data:
             id = data['id']
             conn = get_db_connection()
             posts = conn.execute('SELECT file_path FROM request WHERE file_id=?',(id,)).fetchall()
             file_path = posts[0]['file_path']
             data['file_path']=file_path
-            result = infer_model(data["language"], data["modality"], MODEL_PATH, upload, data["meta"]["device"])
+            filename_name = file_path.split('/')
+            shutil.move(file_path,batch_folder + "/" + filename_name[-1])
             
-            context = {"text":result}
-            context.update(data)
-            main_context.append(context.copy())
-        return jsonify({"data":main_context})
+        result = infer_model(data["language"], data["modality"], MODEL_PATH, batch_folder, data["meta"]["device"])
+        for data in json_data:
+            for key in result.keys():
+                img_name1 = "img_" + key.split('/')[-1]
+                img_name2 = data['file_path'].split('/')[-1]
+                if img_name1 == img_name2:
+                    data["text"] = result[key]
+        return jsonify({"data":json_data,"text":result})
 
 if __name__ == '__main__':
 	# when first starting the app from docker, we load the model into memory
