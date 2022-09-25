@@ -9,12 +9,12 @@ from torch.utils.data import DataLoader, SequentialSampler
 from torchvision.transforms import Normalize
 from tqdm import tqdm
 
-
 from doctr import datasets
 from doctr import transforms as T
 from doctr.datasets import VOCABS
 from doctr.models import recognition
 from doctr.utils.metrics import TextMatch
+from config import ALLOWED_EXTENSIONS
 
 os.environ["USE_TORCH"] = "1"
 
@@ -25,18 +25,13 @@ def get_test_results(predictions, language):
     df = df.drop_duplicates()
     df['id']= df['name'].str.split("_")
     df[['temp','id']] =  pd.DataFrame(df.id.tolist(), index= df.index)
-    df['id'] = df['id'].apply(lambda x: str(x).rstrip('.jpg'))
-    df['id'] = df['id'].astype(int)
     df['name'] = df['name'].str.replace('_','/')
     df = df.sort_values('id')
     df = df[['name','pred']]
     data = dict(zip(df.name, df.pred))
     filename = 'results.txt'
-    df.to_csv(filename, sep='\t', index=False)
+    df.to_csv(filename, mode='a',sep='\t', index=False)
     return data
-    
-    
-
 
 
 @torch.no_grad()
@@ -84,7 +79,7 @@ def evaluate(model, val_loader, batch_transforms, val_metric, amp=False):
 
 def infer_model(language, modality, model_path, img_path, device):
 
-    arch = "crnn_vgg16_bn_" + modality + "_" + language + ".pt" 
+    arch = "crnn_vgg16_bn_" + language + ".pt" 
     workers = None
     torch.backends.cudnn.benchmark = True
 
@@ -134,16 +129,12 @@ def infer_model(language, modality, model_path, img_path, device):
     val_metric = TextMatch()
 
     # GPU
-    if isinstance(device, int):
-        if not torch.cuda.is_available():
-            raise AssertionError("PyTorch cannot access your GPU. Please investigate!")
-        if device >= torch.cuda.device_count():
-            raise ValueError("Invalid device index")
     # Silent default switch to GPU if available
-    elif torch.cuda.is_available():
+    if torch.cuda.is_available():
         device = 0
     else:
         print("No accessible GPU, targe device set to CPU.")
+    
     if torch.cuda.is_available():
         torch.cuda.set_device(device)
         model = model.cuda()
@@ -160,3 +151,6 @@ def log(s):
 	s = f'[{int(time.time()*100)%10000}]\t{s}'
 	print(s)
 
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
