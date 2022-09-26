@@ -36,10 +36,10 @@ API for Handwritten and Printed Texts Recognition for Indian Languages using Doc
         }
     }
 
-## Interference
+## Inference
 ### Request
 
-`POST /api/v0/interference`
+`POST /api/v0/inference`
 
     [{
     "id": "id from first api",
