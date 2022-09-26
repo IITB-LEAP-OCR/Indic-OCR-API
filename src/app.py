@@ -81,7 +81,7 @@ def perform_inference():
             file_path = posts[0]['file_path']
             data['file_path']=file_path
             filename_name = file_path.split('/')
-            shutil.move(file_path,batch_folder + "/" + filename_name[-1])
+            shutil.move(file_path, batch_folder + "/" + filename_name[-1])
             
         result = infer_model(data["language"], data["modality"], MODEL_PATH, batch_folder, data["meta"]["device"])
         for data in json_data:

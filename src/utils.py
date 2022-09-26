@@ -79,7 +79,7 @@ def evaluate(model, val_loader, batch_transforms, val_metric, amp=False):
 
 def infer_model(language, modality, model_path, img_path, device):
 
-    arch = "crnn_vgg16_bn_" + language + ".pt" 
+    arch = "crnn_vgg16_bn_" + "handwritten_" + language + ".pt" 
     workers = None
     torch.backends.cudnn.benchmark = True
 
@@ -93,7 +93,7 @@ def infer_model(language, modality, model_path, img_path, device):
         vocab=VOCABS[language],
     ).eval()
 
-    checkpoint = torch.load(model_path + arch, map_location="cpu")
+    checkpoint = torch.load(model_path + arch , map_location="cpu")
     model.load_state_dict(checkpoint)
 
         

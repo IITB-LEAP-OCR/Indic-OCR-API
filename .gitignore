@@ -140,3 +140,4 @@ src/models/detection/handwritten/*.pt
 src/log.txt
 
 src/uploads/*
+src/test.py
