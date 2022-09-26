@@ -24,6 +24,7 @@ RUN pip3 install torch torchvision
 RUN pip3 install wget
 RUN python3 setup.py
 RUN mkdir uploads
+RUN mv *.pt /data/app/src/models/recognition/handwritten/
 
 EXPOSE 5000
 
