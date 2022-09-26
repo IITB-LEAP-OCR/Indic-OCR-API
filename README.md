@@ -48,7 +48,6 @@ API for Handwritten and Printed Texts Recognition for Indian Languages using Doc
     "language": "bengali",
     "model-id": "1",
     "meta": {
-        "input_path": "./../sample/",
         "device": 0
     }}
     ]
@@ -71,7 +70,6 @@ API for Handwritten and Printed Texts Recognition for Indian Languages using Doc
             "level": "word",
             "meta": {
                 "device": 0,
-                "input_path": "./../sample/"
             },
             "modality": "handwritten",
             "model-id": "1",

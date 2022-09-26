@@ -1,11 +1,10 @@
 {
-    "image-content": ["./../images/sample.jpg", "./../images/sample2.jpg"],
+    "image-content": "id from first api",
     "modality": "handwritten",
     "level": "word",
     "language": "hindi",
     "model-id": "1",
     "meta": {
-        "input_path": "./../sample/",
         "device": 0
     }
    

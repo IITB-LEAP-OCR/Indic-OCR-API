@@ -6,10 +6,11 @@ FROM python:3.8
 # Install Indic Doctr
 RUN git clone https://github.com/kasuba-badri-vishal/doctr-iitb.git /doctr_indic
 WORKDIR /doctr_indic
-RUN git reset --hard 241539dbb624386202f929ecc575dd8950fb6fb0
+RUN pip install python-doctr
+RUN pip install "python-doctr[torch]"
 RUN pip install -e .
 
-RUN git clone https://github.com/gamingflexer/DocTR_Indic_OCR_API.git /data/app
+RUN git clone https://github.com/document-analysis-tools/Indic-OCR-API /data/app
 
 WORKDIR /data
 WORKDIR /data/app/src/

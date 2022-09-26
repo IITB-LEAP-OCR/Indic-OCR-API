@@ -1,5 +1,5 @@
 import wget,os
-from config import modelpath
+from config import MODEL_PATH
 
 links = ['https://github.com/kasuba-badri-vishal/doctr-iitb/releases/download/Indic_Models/crnn_vgg16_bn_handwritten_bengali.pt',
 'https://github.com/kasuba-badri-vishal/doctr-iitb/releases/download/Indic_Models/crnn_vgg16_bn_handwritten_hindi.pt',
@@ -11,14 +11,13 @@ links = ['https://github.com/kasuba-badri-vishal/doctr-iitb/releases/download/In
 'https://github.com/kasuba-badri-vishal/doctr-iitb/releases/download/Indic_Models/crnn_vgg16_bn_handwritten_telugu.pt',
 'https://github.com/kasuba-badri-vishal/doctr-iitb/releases/download/Indic_Models/crnn_vgg16_bn_handwritten_urdu.pt']
 
-download_folder = os.path.join(modelpath, 'recognition', 'handwritten')
 
 
 
 for link in links:
     try:
-        os.system('wget -nc {} {}'.format(download_folder,link))
+        os.system('wget -nc {} {}'.format(MODEL_PATH,link))
     except:
-        wget.download(link, download_folder)
+        wget.download(link, MODEL_PATH)
     
 print("\nDownloaded all models")
