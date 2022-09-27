@@ -12,7 +12,6 @@ RUN pip install -e .
 
 RUN git clone https://github.com/document-analysis-tools/Indic-OCR-API /data/app
 
-WORKDIR /data
 WORKDIR /data/app/src/
 
 RUN pip install -r requirements.txt
@@ -22,9 +21,12 @@ RUN apt-get install ffmpeg libsm6 libxext6  -y
 RUN pip3 install torch torchvision
 
 RUN pip3 install wget
-RUN python3 setup.py
+RUN mkdir models
 RUN mkdir uploads
+WORKDIR /data/app/src/models/
 
+WORKDIR /data/app/src/
+RUN python3 setup.py
 EXPOSE 5000
 
 
