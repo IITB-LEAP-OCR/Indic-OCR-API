@@ -20,14 +20,13 @@ RUN apt update && apt install -y curl
 RUN apt-get install ffmpeg libsm6 libxext6  -y
 RUN pip3 install torch torchvision
 
-RUN pip3 install wget
 RUN mkdir models
 RUN mkdir uploads
-WORKDIR /data/app/src/models/
+
+WORKDIR /data/app/src/models
+RUN pip3 install wget
+RUN python3 setup.py
 
 WORKDIR /data/app/src/
-RUN python3 setup.py
 EXPOSE 5000
-
-
 CMD ["python3","app.py"]
