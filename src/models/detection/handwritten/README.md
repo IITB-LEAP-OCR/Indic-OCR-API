@@ -1,1 +1,0 @@
-# indic-ocr-api

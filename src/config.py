@@ -1,18 +1,10 @@
 import os
 
-# MODEL_PATH = "./../models/recognition/handwritten/"
-INPUT_PATH = "./../datasets/"
-
 HOST = "0.0.0.0"
 PORT = 5000
 
-basepath = os.path.dirname(os.path.realpath(__file__))
-
-modelpath = os.path.join(basepath, 'models')
-
-MODEL_PATH = os.path.join(modelpath, 'recognition', 'handwritten') + '/'
-
-
-upload = os.path.join(basepath, 'uploads')
-
+# INPUT_PATH = "./../datasets/"
+BASEPATH = os.path.dirname(os.path.realpath(__file__))
+MODELPATH = os.path.join(BASEPATH, 'models/')
+UPLOAD = os.path.join(BASEPATH, 'uploads/')
 ALLOWED_EXTENSIONS = (['png','jpg','jpeg'])

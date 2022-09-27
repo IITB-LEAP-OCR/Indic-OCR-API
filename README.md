@@ -2,7 +2,7 @@
 API for Handwritten and Printed Texts Recognition for Indian Languages using DocTR model
 
 
-# Docker Instructions
+# Docker Usage Instructions
 
 ## Build Docker Image
 
@@ -17,7 +17,7 @@ API for Handwritten and Printed Texts Recognition for Indian Languages using Doc
 ## Upload Image
 ### Request
 
-`POST /api/v0/upload`
+`POST /api/v1/upload`
 
     file upload with key as 'file'
 
@@ -39,7 +39,7 @@ API for Handwritten and Printed Texts Recognition for Indian Languages using Doc
 ## Inference
 ### Request
 
-`POST /api/v0/inference`
+`POST /api/v1/inference`
 
     [{
     "id": "id from first api",
@@ -76,3 +76,12 @@ API for Handwritten and Printed Texts Recognition for Indian Languages using Doc
             "text": ""
         }
     ]}
+
+
+# UI Usage Instructions
+
+The Version 0 is UI based method to use the API
+
+1. Go to ```http://localhost:5000/api/v0/upload```
+2. Provide the require arguments, sample image is provided here
+3. Submit the Input to fetch the result predictions

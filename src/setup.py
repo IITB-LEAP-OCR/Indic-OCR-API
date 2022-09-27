@@ -1,5 +1,5 @@
 import wget,os
-from config import MODEL_PATH
+from config import MODELPATH
 
 links = ['https://github.com/kasuba-badri-vishal/doctr-iitb/releases/download/Indic_Models/crnn_vgg16_bn_handwritten_bengali.pt',
 'https://github.com/kasuba-badri-vishal/doctr-iitb/releases/download/Indic_Models/crnn_vgg16_bn_handwritten_hindi.pt',
@@ -16,8 +16,8 @@ links = ['https://github.com/kasuba-badri-vishal/doctr-iitb/releases/download/In
 
 for link in links:
     try:
-        os.system('wget -nc {} {}'.format(MODEL_PATH,link))
+        os.system('wget -nc {} {}'.format(MODELPATH,link))
     except:
-        wget.download(link, MODEL_PATH)
+        wget.download(link, MODELPATH)
     
 print("\nDownloaded all models")
